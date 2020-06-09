@@ -37,7 +37,7 @@ jobs:
 
     - name: Run a npm env script with branch
       run: |
-        case "${GITHUB_REF##*/}" in
+        case "${GITHUB_HEAD_REF}" in
           "dev" | "develop" | "development" )         npm run foo:dev ;;
           "stg" | "staging" )                         npm run foo:stg ;;
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
