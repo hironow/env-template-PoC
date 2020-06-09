@@ -33,6 +33,8 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
+    - run: printenv
+
     - name: Run a npm env script with branch
       run: |
         case "${GITHUB_REF##*/}" in
