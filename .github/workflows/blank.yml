@@ -7,9 +7,6 @@ name: CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches:
-    - "*"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,11 +32,15 @@ jobs:
 
     - run: printenv
 
-    - name: Run a npm env script with branch
+    - name: define branchname
       run: |
-        case "${GITHUB_HEAD_REF}" in
+        echo "::set-env name=branchname::${GITHUB_REF#refs/heads/}"
+
+    - name: Run a npm env script with branchname
+      run: |
+        case "${branchname}" in
           "dev" | "develop" | "development" )         npm run foo:dev ;;
           "stg" | "staging" )                         npm run foo:stg ;;
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
-          * ) echo "non target... ${GITHUB_HEAD_REF}"; exit 0;
+          * ) echo "non target... ${branchname}"; exit 0;
         esac
