@@ -44,3 +44,7 @@ jobs:
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
           * ) echo "non target... ${branchname}"; exit 0;
         esac
+      env:
+        FOO_DEV: ${{ secrets.FOO_DEV }}
+        FOO_STG: ${{ secrets.FOO_STG }}
+        FOO_PRD: ${{ secrets.FOO_PRD }}
