@@ -7,9 +7,6 @@ name: CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches:
-    - "*"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,7 +34,7 @@ jobs:
 
     - name: define branchname
       run: |
-        echo "::set-env name=branchname::$(git rev-parse --abbrev-ref HEAD)"
+        echo "::set-env name=branchname::${GITHUB_REF#refs/heads/}"
 
     - name: Run a npm env script with branchname
       run: |
