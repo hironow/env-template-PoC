@@ -43,9 +43,20 @@ jobs:
           "dev" | "develop" | "development" )         npm run foo:dev ;;
           "stg" | "staging" )                         npm run foo:stg ;;
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
-          * ) echo "non target... ${branchname}"; exit 0;
+          * ) echo "non target... ${branchname}"; exit 1;
         esac
       env:
         FOO_DEV: ${{ secrets.FOO_DEV }}
         FOO_STG: ${{ secrets.FOO_STG }}
         FOO_PRD: ${{ secrets.FOO_PRD }}
+    - name: Notify failure
+      if: failure()
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"failure!"}' ${SLACK_WEBHOOK_URL}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    - name: Notify success
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"success!"}' ${SLACK_WEBHOOK_URL}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
