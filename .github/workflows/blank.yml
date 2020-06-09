@@ -41,5 +41,5 @@ jobs:
           "dev" | "develop" | "development" )         npm run foo:dev ;;
           "stg" | "staging" )                         npm run foo:stg ;;
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
-          * ) echo "${GITHUB_REF##*/}"; exit 1;
+          * ) echo "${GITHUB_HEAD_REF}"; exit 0;
         esac
