@@ -37,7 +37,8 @@ jobs:
 
     - name: Run a npm env script with branch
       run: |
-        case "${GITHUB_HEAD_REF}" in
+        echo "::set-env name=brunch::$(git rev-parse --abbrev-ref HEAD)"
+        case "${brunch}" in
           "dev" | "develop" | "development" )         npm run foo:dev ;;
           "stg" | "staging" )                         npm run foo:stg ;;
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
