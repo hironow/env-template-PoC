@@ -1,3 +1,3 @@
-echo "target... in production"
+echo "target..."
 echo ${FOO}
 echo "finished"
