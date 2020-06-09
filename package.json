@@ -1,0 +1,15 @@
+{
+  "name": "env-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "foo": "sh -ac '. ./.env.${APP_ENV}; sh script.sh'",
+    "foo:dev": "APP_ENV=dev npm run foo",
+    "foo:stg": "APP_ENV=stg npm run foo",
+    "foo:prd": "APP_ENV=prd npm run foo"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
