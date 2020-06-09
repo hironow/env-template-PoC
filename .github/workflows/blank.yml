@@ -35,12 +35,15 @@ jobs:
 
     - run: printenv
 
-    - name: Run a npm env script with branch
+    - name: define branchname
       run: |
-        echo "::set-env name=brunch::$(git rev-parse --abbrev-ref HEAD)"
-        case "${brunch}" in
+        echo "::set-env name=branchname::$(git rev-parse --abbrev-ref HEAD)"
+
+    - name: Run a npm env script with branchname
+      run: |
+        case "${branchname}" in
           "dev" | "develop" | "development" )         npm run foo:dev ;;
           "stg" | "staging" )                         npm run foo:stg ;;
           "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
-          * ) echo "non target... ${brunch}"; exit 0;
+          * ) echo "non target... ${branchname}"; exit 0;
         esac
