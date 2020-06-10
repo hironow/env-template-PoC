@@ -1,15 +1,28 @@
 {
   "name": "env-template",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "foo": "sh -ac '. ./.env.${APP_ENV}; sh script.sh'",
-    "foo:dev": "APP_ENV=dev npm run foo",
-    "foo:stg": "APP_ENV=stg npm run foo",
-    "foo:prd": "APP_ENV=prd npm run foo"
+    "deploy:dev": "run-s deploy:foo:dev deploy:bar:dev",
+    "deploy:stg": "run-s deploy:foo:stg deploy:bar:stg",
+    "deploy:prd": "run-s deploy:foo:prd deploy:bar:prd",
+    "deploy:foo:dev": "cd foo && npm run deploy:dev",
+    "deploy:foo:stg": "cd foo && npm run deploy:stg",
+    "deploy:foo:prd": "cd foo && npm run deploy:prd",
+    "deploy:bar:dev": "cd bar && npm run deploy:dev",
+    "deploy:bar:stg": "cd bar && npm run deploy:stg",
+    "deploy:bar:prd": "cd bar && npm run deploy:prd"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hironow/env-template.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hironow/env-template/issues"
+  },
+  "homepage": "https://github.com/hironow/env-template#readme",
+  "private": true,
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
