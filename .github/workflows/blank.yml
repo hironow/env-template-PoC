@@ -40,23 +40,26 @@ jobs:
     - name: Run a npm env script with branchname
       run: |
         case "${branchname}" in
-          "dev" | "develop" | "development" )         npm run foo:dev ;;
-          "stg" | "staging" )                         npm run foo:stg ;;
-          "prd" | "prod" | "production" | "master" )  npm run foo:prd ;;
+          "dev" | "develop" | "development" )         make deploy-dev ;;
+          "stg" | "staging" )                         make deploy-stg ;;
+          "prd" | "prod" | "production" | "master" )  make deploy-prd ;;
           * ) echo "non target... ${branchname}"; exit 1;
         esac
       env:
         FOO_DEV: ${{ secrets.FOO_DEV }}
         FOO_STG: ${{ secrets.FOO_STG }}
         FOO_PRD: ${{ secrets.FOO_PRD }}
+        BAR_DEV: ${{ secrets.BAR_DEV }}
+        BAR_STG: ${{ secrets.BAR_STG }}
+        BAR_PRD: ${{ secrets.BAR_PRD }}
     - name: Notify failure
       if: failure()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"failure!"}' ${SLACK_WEBHOOK_URL}
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"failure! on '${branchname}'"}' ${SLACK_WEBHOOK_URL}
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     - name: Notify success
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"success!"}' ${SLACK_WEBHOOK_URL}
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"success! on '${branchname}'"}' ${SLACK_WEBHOOK_URL}
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
