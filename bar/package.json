@@ -1,0 +1,11 @@
+{
+  "name": "env-template-bar",
+  "scripts": {
+    "deploy": "sh -ac '. ../.env.${APP_ENV}; sh script.sh'",
+    "deploy:dev": "APP_ENV=dev npm run deploy",
+    "deploy:stg": "APP_ENV=stg npm run deploy",
+    "deploy:prd": "APP_ENV=prd npm run deploy"
+  },
+  "license": "MIT",
+  "private": true
+}
