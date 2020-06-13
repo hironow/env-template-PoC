@@ -17,7 +17,7 @@ func main() {
 	var c Config
 	err := envconfig.Process("baz", &c)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal("envconfig process failed")
 	}
 
 	if c.One != "" {

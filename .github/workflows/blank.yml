@@ -53,6 +53,15 @@ jobs:
         BAR_DEV: ${{ secrets.BAR_DEV }}
         BAR_STG: ${{ secrets.BAR_STG }}
         BAR_PRD: ${{ secrets.BAR_PRD }}
+        BAZ_ONE_DEV: ${{ secrets.BAZ_ONE_DEV }}
+        BAZ_ONE_STG: ${{ secrets.BAZ_ONE_STG }}
+        BAZ_ONE_PRD: ${{ secrets.BAZ_ONE_PRD }}
+        BAZ_TWO_DEV: ${{ secrets.BAZ_TWO_DEV }}
+        BAZ_TWO_STG: ${{ secrets.BAZ_TWO_STG }}
+        BAZ_TWO_PRD: ${{ secrets.BAZ_TWO_PRD }}
+        BAZ_THREE_DEV: ${{ secrets.BAZ_THREE_DEV }}
+        BAZ_THREE_STG: ${{ secrets.BAZ_THREE_STG }}
+        BAZ_THREE_PRD: ${{ secrets.BAZ_THREE_PRD }}
     - name: Notify failure
       if: failure()
       run: |
