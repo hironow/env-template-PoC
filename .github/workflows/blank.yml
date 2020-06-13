@@ -40,11 +40,12 @@ jobs:
     - name: Run a npm env script with branchname
       run: |
         case "${branchname}" in
-          "dev" | "develop" | "development" )         make deploy-dev ;;
-          "stg" | "staging" )                         make deploy-stg ;;
-          "prd" | "prod" | "production" | "master" )  make deploy-prd ;;
+          "dev" | "develop" | "development" )         APP_ENV=dev envsubst < .env.dev > .env ;;
+          "stg" | "staging" )                         APP_ENV=stg envsubst < .env.stg > .env ;;
+          "prd" | "prod" | "production" | "master" )  APP_ENV=prd envsubst < .env.prd > .env ;;
           * ) echo "non target... ${branchname}"; exit 1;
         esac
+        make deploy
       env:
         FOO_DEV: ${{ secrets.FOO_DEV }}
         FOO_STG: ${{ secrets.FOO_STG }}
