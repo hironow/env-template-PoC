@@ -28,7 +28,10 @@ guard-%:
 # application command
 PHONY: deploy
 deploy: guard-APP_ENV ## deploy APP_ENV
-	@make -j deploy-foo deploy-bar
+	@make -j deploy-npm-foo deploy-npm-bar deploy-go-baz
 
-deploy-%:
+deploy-npm-%:
 	@cd $(*) && npm run deploy
+
+deploy-go-%:
+	@cd $(*) && go run main.go
